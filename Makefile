@@ -712,6 +712,7 @@ override CONFIG_CH341A_SPI = no
 override CONFIG_DEDIPROG = no
 override CONFIG_DIGILENT_SPI = no
 override CONFIG_DEVELOPERBOX_SPI = no
+override CONFIG_MCP2210_SPI = no
 endif
 ifeq ($(CONFIG_ENABLE_LIBPCI_PROGRAMMERS), no)
 override CONFIG_INTERNAL = no
@@ -993,9 +994,9 @@ endif
 
 ifeq ($(CONFIG_MCP2210_SPI), yes)
 FEATURE_CFLAGS += -D'CONFIG_MCP2210_SPI=1'
-PROGRAMMER_OBJS += libmcp2210/hid_linux.o libmcp2210/libmcp2210.o \
+PROGRAMMER_OBJS += libmcp2210/hid_libusb.o libmcp2210/libmcp2210.o \
 	mcp2210_spi.o
-LIBS += -ludev
+NEED_LIBUSB1 += CONFIG_MCP2210_SPI
 endif
 
 ifneq ($(NEED_SERIAL), )
